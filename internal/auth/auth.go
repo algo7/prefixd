@@ -17,9 +17,12 @@ func Authorized(r *http.Request, feedToken string) bool {
 	}
 
 	// Prefer the query parameter; fall back to the Authorization header.
+	// The Authorization header must start with "Bearer "; raw values are rejected.
 	got := r.URL.Query().Get("token")
 	if got == "" {
-		got = strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
+		if rest, ok := strings.CutPrefix(r.Header.Get("Authorization"), "Bearer "); ok {
+			got = rest
+		}
 	}
 
 	// Use constant-time comparison to prevent timing-based token enumeration.

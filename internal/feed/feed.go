@@ -120,5 +120,9 @@ func buildFeed(path string) ([]byte, error) {
 	// Sort lexicographically so the output is deterministic and human-readable.
 	sort.Strings(lines)
 
+	// An empty input yields an empty output, not a stray newline.
+	if len(lines) == 0 {
+		return []byte{}, nil
+	}
 	return []byte(strings.Join(lines, "\n") + "\n"), nil
 }
