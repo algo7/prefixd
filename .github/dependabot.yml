@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: 'gomod'
+    directory: /
+    groups:
+      go:
+        patterns:
+          - '*'
+    schedule:
+      interval: 'weekly'
+    assignees:
+      - 'algo7'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+    schedule:
+      interval: 'weekly'
+    assignees:
+      - 'algo7'
