@@ -1,7 +1,7 @@
 # Variables
 NAME:= prefixd
 VERSION ?= latest
-BUILD_TIME:= $(shell TZ="Europe/Zurich" date)
+IMG ?= $(NAME):$(VERSION)
 GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
 
@@ -61,3 +61,7 @@ build-all: build-amd64-linux build-amd64-windows build-amd64-darwin build-arm64-
 .PHONEY: clean
 clean: ## Clean build artifacts
 	rm -rf ./bin
+
+.PHONY: docker-build
+docker-build: ## Build the Docker image
+	docker build -t ${IMG} .

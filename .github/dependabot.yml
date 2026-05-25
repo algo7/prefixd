@@ -21,3 +21,10 @@ updates:
       interval: 'weekly'
     assignees:
       - 'algo7'
+
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    assignees:
+      - 'algo7'
