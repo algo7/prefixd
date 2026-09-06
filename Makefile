@@ -1,5 +1,5 @@
 # Variables
-NAME:= prefixd
+NAME:= aliasd
 VERSION ?= latest
 IMG ?= $(NAME):$(VERSION)
 GOOS ?= $(shell go env GOOS)

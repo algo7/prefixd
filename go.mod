@@ -1,4 +1,4 @@
-module github.com/algo7/prefixd
+module github.com/algo7/aliasd
 
 go 1.27.0
 

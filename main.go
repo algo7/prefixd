@@ -6,9 +6,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/algo7/aliasd/internal/auth"
+	"github.com/algo7/aliasd/internal/config"
 	"github.com/algo7/go-utils/bootstrap"
-	"github.com/algo7/prefixd/internal/auth"
-	"github.com/algo7/prefixd/internal/config"
 )
 
 var (
@@ -40,6 +40,6 @@ func main() {
 		Handler:           mux,
 		ReadHeaderTimeout: 5 * time.Second,
 	}
-	log.Printf("prefixd version %s serving %s on %s", Version, aliasFile, listenAddr)
+	log.Printf("aliasd version %s serving %s on %s", Version, aliasFile, listenAddr)
 	log.Fatal(srv.ListenAndServe())
 }

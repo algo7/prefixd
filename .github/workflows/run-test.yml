@@ -1,4 +1,4 @@
-name: Test prefixd
+name: Test aliasd
 run-name: PR ${{ github.event.pull_request.number }} triggered by @${{ github.actor }}
 
 permissions:
@@ -14,7 +14,7 @@ on:
       - 'README.md'
 jobs:
   test:
-    name: Test prefixd
+    name: Test aliasd
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

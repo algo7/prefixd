@@ -24,7 +24,7 @@ func RequireBasic(user, pass string, next http.Handler) http.Handler {
 		passOK := subtle.ConstantTimeCompare([]byte(gotPass), expectedPass)
 
 		if !ok || userOK&passOK != 1 {
-			w.Header().Set("WWW-Authenticate", `Basic realm="prefixd", charset="UTF-8"`)
+			w.Header().Set("WWW-Authenticate", `Basic realm="aliasd", charset="UTF-8"`)
 			http.Error(w, "unauthorized", http.StatusUnauthorized)
 			return
 		}
