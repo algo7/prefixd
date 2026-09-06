@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -29,22 +28,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// The handler function for the aliases
-	aliases := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		name := req.PathValue("name")
-		entries, ok := c.Aliases[name]
-		if !ok {
-			http.NotFound(w, req)
-			return
-		}
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		for _, entry := range entries {
-			fmt.Fprintln(w, entry)
-		}
-	})
-
 	mux := http.NewServeMux()
-	mux.Handle("GET /{name}", auth.RequireBasic(aliasUser, aliasPass, aliases))
+	mux.Handle("GET /{name}", auth.RequireBasic(aliasUser, aliasPass, c))
 
 	if aliasPass == "" {
 		log.Printf("WARNING: ALIAS_PASS unset, aliases are served without authentication")

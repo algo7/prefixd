@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"net/http"
 	"net/netip"
 	"os"
 	"strings"
@@ -55,4 +56,21 @@ func New(configPath string) (*Config, error) {
 		}
 	}
 	return cfg, nil
+}
+
+// ServeHTTP writes the entries of the alias named by the "name" path value,
+// one per line. An unknown name is a 404 rather than an empty 200, so a
+// mistyped alias fails loudly in pfSense instead of loading as a list that
+// silently matches nothing.
+func (c *Config) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	entries, ok := c.Aliases[r.PathValue("name")]
+	if !ok {
+		http.NotFound(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	for _, entry := range entries {
+		fmt.Fprintln(w, entry)
+	}
 }
